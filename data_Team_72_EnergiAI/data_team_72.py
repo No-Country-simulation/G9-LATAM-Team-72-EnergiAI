@@ -1,0 +1,196 @@
+# G9-LATAM-Team-72-EnergiAI
+# Simulación de Datos - Equipo Data Science
+# Versión 1.0
+
+# ---------------------------------------------------------
+# IMPORTAR LIBRERIAS
+import pandas as pd
+import numpy as np
+import random
+from datetime import datetime
+
+# ---------------------------------------------------------
+# CONFIGURACION DE REPRODUCTIVIDAD, TEAM 72
+np.random.seed(72)
+random.seed(72)
+
+# ---------------------------------------------------------
+# PARAMETROS REGIONALES DE LATINOAMERICA
+paises_config = {
+    "Colombia": {"moneda": "COP", "tipo_cambio_usd": 4100.0},
+    "Chile": {"moneda": "CLP", "tipo_cambio_usd": 920.0},
+    "Mexico": {"moneda": "MXN", "tipo_cambio_usd": 18.50},
+    "Argentina": {"moneda": "ARS", "tipo_cambio_usd": 950.0},
+    "Peru": {"moneda": "PEN", "tipo_cambio_usd": 3.75},
+    "Brasil": {"moneda": "BRL", "tipo_cambio_usd": 5.45} 
+}
+
+lista_paises = list(paises_config.keys())
+
+# ---------------------------------------------------------
+# CANTIDAD DE REGISTROS A SIMULAR
+num_inmuebles = 120
+establecimientos_data = []
+
+# ---------------------------------------------------------
+# CREAR TABLA ESTABLECIMIENTOS
+
+for i in range(1, num_inmuebles + 1):
+    tipo = random.choice(["Vivienda", "Comercio"])
+    pais = random.choice(lista_paises)
+    
+    if tipo == "Vivienda":
+        id_inmueble = f"VIV-{i:03d}"
+        categoria = "No Aplica"
+        m2 = int(np.random.normal(90, 25))  # Promedio 90m2
+        m2 = max(40, min(m2, 250))          # Límites lógicos
+        habitantes_empleados = random.randint(1, 6)
+    else:
+        id_inmueble = f"COM-{i:03d}"
+        categoria = random.choice(["Categoria A", "Categoria B", "Categoria C"])
+        habitantes_empleados = random.randint(2, 12) # En comercios representan empleados
+        if categoria == "Categoria A":
+            m2 = random.randint(30, 120)
+        elif categoria == "Categoria B":
+            m2 = random.randint(45, 150)
+        else:
+            m2 = random.randint(25, 80)
+            
+    establecimientos_data.append([id_inmueble, tipo, categoria, m2, habitantes_empleados, pais])
+
+df_establecimientos = pd.DataFrame(establecimientos_data, columns=[
+    "id_inmueble", "tipo_establecimiento", "categoria_comercio", "superficie_m2", "habitantes_empleados", "pais_ubicacion"
+])
+
+# ---------------------------------------------------------
+# CREAR TABLA INVENTARIO_EQUIPOS
+
+equipos_data = []
+equipo_id_counter = 1
+
+for idx, row in df_establecimientos.iterrows():
+    # 1. ILUMINACION: Obligatorio para el 100% de los inmuebles
+    equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Iluminacion", random.randint(10, 30), 15, True, round(random.uniform(5, 8), 2)])
+    equipo_id_counter += 1
+    
+    if row['tipo_establecimiento'] == "Vivienda":
+        # 2. REFRIGERACION: Nevera hogareña
+        inv = random.choice([True, False])
+        equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Refrigeracion", 1, 350 if not inv else 180, inv, 24.0])
+        equipo_id_counter += 1
+        
+        # 3. OTROS/FUERZA MOTRIZ: Lavadora/Plancha (Cargas típicas del hogar)
+        equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Otros / Fuerza Motriz", 1, 1200, False, 1.5])
+        equipo_id_counter += 1
+        
+    else: # Es un Comercio
+        if row['categoria_comercio'] == "Categoria A": # Oficinas
+            # 4. COMPUTACION: Estaciones de trabajo
+            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Computacion", row['habitantes_empleados'], 150, True, 8.0])
+            equipo_id_counter += 1
+            
+        elif row['categoria_comercio'] == "Categoria B": # Restaurantes
+            # 5. COCCION Y PROCESAMIENTO: Hornos/Freidoras
+            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Coccion y Procesamiento", 2, 2000, False, 6.0])
+            equipo_id_counter += 1
+            # 6. CLIMATIZACION: Confort del salón
+            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Climatizacion", 2, 2500, random.choice([True, False]), 10.0])
+            equipo_id_counter += 1
+            
+        elif row['categoria_comercio'] == "Categoria C": # Abarrotes
+            # REFRIGERACION INDUSTRIAL: Vitrinas continuas
+            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Refrigeracion", random.randint(2, 4), 750, False, 24.0])
+            equipo_id_counter += 1
+
+df_equipos = pd.DataFrame(equipos_data, columns=[
+    "id_equipo", "id_inmueble", "tipo_equipo", "cantidad_equipos", "potencia_watts", "tecnologia_inverter", "horas_uso_estimadas_dia"
+])
+
+# ---------------------------------------------------------
+# CREAR TABLA CURVA_CARGA_HORARIA 
+
+curva_data = []
+curva_id_counter = 1
+
+for idx, row in df_establecimientos.iterrows():
+    if row['tipo_establecimiento'] == "Vivienda":
+        dist = [0.15, 0.20, 0.25, 0.40] # Concentrado en la noche
+    else:
+        if row['categoria_comercio'] == "Categoria A":
+            dist = [0.05, 0.45, 0.40, 0.10] # Concentrado en horario de oficina (Manana/Tarde)
+        elif row['categoria_comercio'] == "Categoria B":
+            dist = [0.10, 0.30, 0.45, 0.15] # Pico en la tarde/comida
+        else:
+            dist = [0.25, 0.25, 0.25, 0.25] # Abarrotes: Plano por refrigeración continua
+            
+    franjas = ["Madrugada", "Manana", "Tarde", "Noche"]
+    for f, p in zip(franjas, dist):
+        curva_data.append([f"C-{curva_id_counter:04d}", row['id_inmueble'], f, p])
+        curva_id_counter += 1
+
+df_curva = pd.DataFrame(curva_data, columns=["id_curva", "id_inmueble", "franja_horaria", "porcentaje_distribucion"])
+
+# ---------------------------------------------------------
+# CREAR TABLA CONSUMO_MENSUAL
+
+consumo_data = []
+reg_id_counter = 1
+TARIFA_USD_REF = 0.75 # Tarifa estandarizada del proyecto ($0.75 USD)
+
+for idx, row in df_establecimientos.iterrows():
+    pais = row['pais_ubicacion']
+    tipo_cambio = paises_config[pais]["tipo_cambio_usd"]
+
+    # Valores de control por defecto
+    kwh_mes = 0.0
+    perfil = "Moderado"
+    
+    # Simulación de Consumo en base a las reglas cuantitativas
+    if row['tipo_establecimiento'] == "Vivienda":
+        kwh_dia = round(random.uniform(2.2, 9.5), 2)
+        kwh_mes = round(kwh_dia * 30, 2)
+        if kwh_dia < 3.5: perfil = "Eficiente"
+        elif 3.5 <= kwh_dia <= 7.0: perfil = "Moderado"
+        else: perfil = "Ineficiente"
+    else:
+        m2 = row['superficie_m2']
+        if row['categoria_comercio'] == "Categoria A":
+            ie = random.uniform(6, 22)
+            if ie < 8: perfil = "Eficiente"
+            elif 8 <= ie <= 15: perfil = "Moderado"
+            else: perfil = "Ineficiente"
+        elif row['categoria_comercio'] == "Categoria B":
+            ie = random.uniform(35, 80)
+            if ie < 40: perfil = "Eficiente"
+            elif 40 <= ie <= 65: perfil = "Moderado"
+            else: perfil = "Ineficiente"
+        else:
+            ie = random.uniform(65, 125)
+            if ie < 70: perfil = "Eficiente"
+            elif 70 <= ie <= 110: perfil = "Moderado"
+            else: perfil = "Ineficiente"
+            
+        kwh_mes = round(ie * m2, 2)
+        
+    # Estructuración Matemática Financiera Regionalizada
+    costo_usd = kwh_mes * TARIFA_USD_REF
+    costo_moneda_local = round(costo_usd * tipo_cambio, 2)
+    
+    consumo_data.append([f"REG-{reg_id_counter:04d}", row['id_inmueble'], "2026-07-01", kwh_mes, costo_moneda_local, perfil])
+    reg_id_counter += 1
+
+df_consumo = pd.DataFrame(consumo_data, columns=[
+    "id_registro", "id_inmueble", "anio_mes_dd", "consumo_kwh_mes", "costo_factura", "perfil_calculado"
+])
+
+# ---------------------------------------------------------
+# ALMACENAMIENTO Y EXPORTACIÓN A CSV
+
+df_establecimientos.to_csv("establecimientos.csv", index=False)
+df_equipos.to_csv("inventario_equipos.csv", index=False)
+df_curva.to_csv("curva_carga_horaria.csv", index=False)
+df_consumo.to_csv("consumo_mensual.csv", index=False)
+
+print("Base de Datos generada con éxito")
+print(f"Total de inmuebles simulados: {len(df_establecimientos)}")
+print(f"Distribución de perfiles generados:\n{df_consumo['perfil_calculado'].value_counts()}")

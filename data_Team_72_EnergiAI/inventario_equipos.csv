@@ -1,0 +1,316 @@
+id_equipo,id_inmueble,tipo_equipo,cantidad_equipos,potencia_watts,tecnologia_inverter,horas_uso_estimadas_dia
+EQ-0001,VIV-001,Iluminacion,25,15,True,6.96
+EQ-0002,VIV-001,Refrigeracion,1,350,False,24.0
+EQ-0003,VIV-001,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0004,VIV-002,Iluminacion,23,15,True,6.3
+EQ-0005,VIV-002,Refrigeracion,1,350,False,24.0
+EQ-0006,VIV-002,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0007,COM-003,Iluminacion,15,15,True,7.34
+EQ-0008,COM-003,Refrigeracion,3,750,False,24.0
+EQ-0009,VIV-004,Iluminacion,26,15,True,7.69
+EQ-0010,VIV-004,Refrigeracion,1,350,False,24.0
+EQ-0011,VIV-004,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0012,COM-005,Iluminacion,22,15,True,5.23
+EQ-0013,COM-005,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0014,COM-005,Climatizacion,2,2500,True,10.0
+EQ-0015,VIV-006,Iluminacion,23,15,True,5.06
+EQ-0016,VIV-006,Refrigeracion,1,180,True,24.0
+EQ-0017,VIV-006,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0018,COM-007,Iluminacion,27,15,True,7.2
+EQ-0019,COM-007,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0020,COM-007,Climatizacion,2,2500,False,10.0
+EQ-0021,COM-008,Iluminacion,14,15,True,5.99
+EQ-0022,COM-008,Refrigeracion,2,750,False,24.0
+EQ-0023,VIV-009,Iluminacion,11,15,True,7.71
+EQ-0024,VIV-009,Refrigeracion,1,350,False,24.0
+EQ-0025,VIV-009,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0026,COM-010,Iluminacion,21,15,True,6.48
+EQ-0027,COM-010,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0028,COM-010,Climatizacion,2,2500,True,10.0
+EQ-0029,COM-011,Iluminacion,19,15,True,7.81
+EQ-0030,COM-011,Computacion,7,150,True,8.0
+EQ-0031,COM-012,Iluminacion,28,15,True,7.61
+EQ-0032,COM-012,Computacion,6,150,True,8.0
+EQ-0033,COM-013,Iluminacion,29,15,True,5.69
+EQ-0034,COM-013,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0035,COM-013,Climatizacion,2,2500,True,10.0
+EQ-0036,VIV-014,Iluminacion,26,15,True,7.77
+EQ-0037,VIV-014,Refrigeracion,1,180,True,24.0
+EQ-0038,VIV-014,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0039,VIV-015,Iluminacion,14,15,True,5.03
+EQ-0040,VIV-015,Refrigeracion,1,180,True,24.0
+EQ-0041,VIV-015,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0042,VIV-016,Iluminacion,20,15,True,7.06
+EQ-0043,VIV-016,Refrigeracion,1,180,True,24.0
+EQ-0044,VIV-016,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0045,COM-017,Iluminacion,11,15,True,6.51
+EQ-0046,COM-017,Computacion,12,150,True,8.0
+EQ-0047,COM-018,Iluminacion,24,15,True,5.52
+EQ-0048,COM-018,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0049,COM-018,Climatizacion,2,2500,False,10.0
+EQ-0050,COM-019,Iluminacion,29,15,True,5.49
+EQ-0051,COM-019,Refrigeracion,4,750,False,24.0
+EQ-0052,COM-020,Iluminacion,18,15,True,5.17
+EQ-0053,COM-020,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0054,COM-020,Climatizacion,2,2500,True,10.0
+EQ-0055,COM-021,Iluminacion,29,15,True,5.78
+EQ-0056,COM-021,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0057,COM-021,Climatizacion,2,2500,True,10.0
+EQ-0058,VIV-022,Iluminacion,15,15,True,6.06
+EQ-0059,VIV-022,Refrigeracion,1,350,False,24.0
+EQ-0060,VIV-022,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0061,VIV-023,Iluminacion,16,15,True,5.72
+EQ-0062,VIV-023,Refrigeracion,1,350,False,24.0
+EQ-0063,VIV-023,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0064,VIV-024,Iluminacion,27,15,True,7.81
+EQ-0065,VIV-024,Refrigeracion,1,180,True,24.0
+EQ-0066,VIV-024,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0067,COM-025,Iluminacion,15,15,True,5.08
+EQ-0068,COM-025,Refrigeracion,4,750,False,24.0
+EQ-0069,VIV-026,Iluminacion,16,15,True,5.11
+EQ-0070,VIV-026,Refrigeracion,1,180,True,24.0
+EQ-0071,VIV-026,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0072,VIV-027,Iluminacion,20,15,True,7.45
+EQ-0073,VIV-027,Refrigeracion,1,350,False,24.0
+EQ-0074,VIV-027,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0075,COM-028,Iluminacion,28,15,True,5.86
+EQ-0076,COM-028,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0077,COM-028,Climatizacion,2,2500,False,10.0
+EQ-0078,VIV-029,Iluminacion,28,15,True,6.38
+EQ-0079,VIV-029,Refrigeracion,1,350,False,24.0
+EQ-0080,VIV-029,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0081,COM-030,Iluminacion,20,15,True,7.95
+EQ-0082,COM-030,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0083,COM-030,Climatizacion,2,2500,True,10.0
+EQ-0084,COM-031,Iluminacion,16,15,True,7.16
+EQ-0085,COM-031,Refrigeracion,4,750,False,24.0
+EQ-0086,VIV-032,Iluminacion,30,15,True,6.83
+EQ-0087,VIV-032,Refrigeracion,1,350,False,24.0
+EQ-0088,VIV-032,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0089,COM-033,Iluminacion,15,15,True,6.49
+EQ-0090,COM-033,Refrigeracion,4,750,False,24.0
+EQ-0091,COM-034,Iluminacion,21,15,True,7.12
+EQ-0092,COM-034,Computacion,7,150,True,8.0
+EQ-0093,VIV-035,Iluminacion,17,15,True,5.7
+EQ-0094,VIV-035,Refrigeracion,1,180,True,24.0
+EQ-0095,VIV-035,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0096,COM-036,Iluminacion,16,15,True,7.79
+EQ-0097,COM-036,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0098,COM-036,Climatizacion,2,2500,True,10.0
+EQ-0099,VIV-037,Iluminacion,15,15,True,6.28
+EQ-0100,VIV-037,Refrigeracion,1,350,False,24.0
+EQ-0101,VIV-037,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0102,VIV-038,Iluminacion,15,15,True,7.69
+EQ-0103,VIV-038,Refrigeracion,1,180,True,24.0
+EQ-0104,VIV-038,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0105,VIV-039,Iluminacion,27,15,True,7.36
+EQ-0106,VIV-039,Refrigeracion,1,350,False,24.0
+EQ-0107,VIV-039,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0108,COM-040,Iluminacion,11,15,True,5.65
+EQ-0109,COM-040,Computacion,2,150,True,8.0
+EQ-0110,COM-041,Iluminacion,18,15,True,5.37
+EQ-0111,COM-041,Refrigeracion,4,750,False,24.0
+EQ-0112,VIV-042,Iluminacion,21,15,True,5.28
+EQ-0113,VIV-042,Refrigeracion,1,180,True,24.0
+EQ-0114,VIV-042,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0115,VIV-043,Iluminacion,13,15,True,5.71
+EQ-0116,VIV-043,Refrigeracion,1,350,False,24.0
+EQ-0117,VIV-043,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0118,COM-044,Iluminacion,22,15,True,7.35
+EQ-0119,COM-044,Refrigeracion,2,750,False,24.0
+EQ-0120,COM-045,Iluminacion,22,15,True,7.44
+EQ-0121,COM-045,Computacion,2,150,True,8.0
+EQ-0122,VIV-046,Iluminacion,14,15,True,6.98
+EQ-0123,VIV-046,Refrigeracion,1,350,False,24.0
+EQ-0124,VIV-046,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0125,VIV-047,Iluminacion,29,15,True,6.69
+EQ-0126,VIV-047,Refrigeracion,1,180,True,24.0
+EQ-0127,VIV-047,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0128,COM-048,Iluminacion,20,15,True,7.44
+EQ-0129,COM-048,Refrigeracion,3,750,False,24.0
+EQ-0130,COM-049,Iluminacion,14,15,True,7.35
+EQ-0131,COM-049,Computacion,12,150,True,8.0
+EQ-0132,COM-050,Iluminacion,15,15,True,5.68
+EQ-0133,COM-050,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0134,COM-050,Climatizacion,2,2500,False,10.0
+EQ-0135,COM-051,Iluminacion,16,15,True,7.86
+EQ-0136,COM-051,Refrigeracion,2,750,False,24.0
+EQ-0137,COM-052,Iluminacion,14,15,True,6.14
+EQ-0138,COM-052,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0139,COM-052,Climatizacion,2,2500,False,10.0
+EQ-0140,VIV-053,Iluminacion,27,15,True,7.93
+EQ-0141,VIV-053,Refrigeracion,1,350,False,24.0
+EQ-0142,VIV-053,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0143,COM-054,Iluminacion,27,15,True,6.13
+EQ-0144,COM-054,Computacion,11,150,True,8.0
+EQ-0145,COM-055,Iluminacion,21,15,True,7.88
+EQ-0146,COM-055,Computacion,12,150,True,8.0
+EQ-0147,COM-056,Iluminacion,25,15,True,7.24
+EQ-0148,COM-056,Computacion,10,150,True,8.0
+EQ-0149,VIV-057,Iluminacion,21,15,True,7.98
+EQ-0150,VIV-057,Refrigeracion,1,350,False,24.0
+EQ-0151,VIV-057,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0152,COM-058,Iluminacion,13,15,True,5.87
+EQ-0153,COM-058,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0154,COM-058,Climatizacion,2,2500,True,10.0
+EQ-0155,COM-059,Iluminacion,17,15,True,5.38
+EQ-0156,COM-059,Computacion,12,150,True,8.0
+EQ-0157,COM-060,Iluminacion,19,15,True,7.44
+EQ-0158,COM-060,Computacion,6,150,True,8.0
+EQ-0159,COM-061,Iluminacion,10,15,True,6.02
+EQ-0160,COM-061,Refrigeracion,4,750,False,24.0
+EQ-0161,COM-062,Iluminacion,14,15,True,7.53
+EQ-0162,COM-062,Refrigeracion,3,750,False,24.0
+EQ-0163,VIV-063,Iluminacion,27,15,True,7.59
+EQ-0164,VIV-063,Refrigeracion,1,180,True,24.0
+EQ-0165,VIV-063,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0166,VIV-064,Iluminacion,16,15,True,5.93
+EQ-0167,VIV-064,Refrigeracion,1,180,True,24.0
+EQ-0168,VIV-064,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0169,COM-065,Iluminacion,19,15,True,6.12
+EQ-0170,COM-065,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0171,COM-065,Climatizacion,2,2500,True,10.0
+EQ-0172,VIV-066,Iluminacion,18,15,True,7.55
+EQ-0173,VIV-066,Refrigeracion,1,350,False,24.0
+EQ-0174,VIV-066,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0175,VIV-067,Iluminacion,29,15,True,6.18
+EQ-0176,VIV-067,Refrigeracion,1,350,False,24.0
+EQ-0177,VIV-067,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0178,COM-068,Iluminacion,20,15,True,5.74
+EQ-0179,COM-068,Refrigeracion,2,750,False,24.0
+EQ-0180,COM-069,Iluminacion,21,15,True,7.05
+EQ-0181,COM-069,Computacion,8,150,True,8.0
+EQ-0182,VIV-070,Iluminacion,17,15,True,6.85
+EQ-0183,VIV-070,Refrigeracion,1,350,False,24.0
+EQ-0184,VIV-070,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0185,COM-071,Iluminacion,17,15,True,6.48
+EQ-0186,COM-071,Refrigeracion,2,750,False,24.0
+EQ-0187,VIV-072,Iluminacion,27,15,True,5.61
+EQ-0188,VIV-072,Refrigeracion,1,350,False,24.0
+EQ-0189,VIV-072,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0190,VIV-073,Iluminacion,22,15,True,5.21
+EQ-0191,VIV-073,Refrigeracion,1,350,False,24.0
+EQ-0192,VIV-073,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0193,VIV-074,Iluminacion,13,15,True,6.45
+EQ-0194,VIV-074,Refrigeracion,1,180,True,24.0
+EQ-0195,VIV-074,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0196,VIV-075,Iluminacion,28,15,True,8.0
+EQ-0197,VIV-075,Refrigeracion,1,350,False,24.0
+EQ-0198,VIV-075,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0199,COM-076,Iluminacion,15,15,True,5.67
+EQ-0200,COM-076,Refrigeracion,3,750,False,24.0
+EQ-0201,VIV-077,Iluminacion,28,15,True,7.07
+EQ-0202,VIV-077,Refrigeracion,1,350,False,24.0
+EQ-0203,VIV-077,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0204,VIV-078,Iluminacion,13,15,True,6.32
+EQ-0205,VIV-078,Refrigeracion,1,350,False,24.0
+EQ-0206,VIV-078,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0207,COM-079,Iluminacion,23,15,True,5.42
+EQ-0208,COM-079,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0209,COM-079,Climatizacion,2,2500,True,10.0
+EQ-0210,COM-080,Iluminacion,27,15,True,5.6
+EQ-0211,COM-080,Computacion,10,150,True,8.0
+EQ-0212,VIV-081,Iluminacion,26,15,True,5.96
+EQ-0213,VIV-081,Refrigeracion,1,180,True,24.0
+EQ-0214,VIV-081,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0215,COM-082,Iluminacion,15,15,True,5.77
+EQ-0216,COM-082,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0217,COM-082,Climatizacion,2,2500,False,10.0
+EQ-0218,VIV-083,Iluminacion,22,15,True,5.51
+EQ-0219,VIV-083,Refrigeracion,1,180,True,24.0
+EQ-0220,VIV-083,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0221,COM-084,Iluminacion,21,15,True,5.83
+EQ-0222,COM-084,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0223,COM-084,Climatizacion,2,2500,False,10.0
+EQ-0224,VIV-085,Iluminacion,14,15,True,6.98
+EQ-0225,VIV-085,Refrigeracion,1,350,False,24.0
+EQ-0226,VIV-085,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0227,VIV-086,Iluminacion,22,15,True,5.79
+EQ-0228,VIV-086,Refrigeracion,1,180,True,24.0
+EQ-0229,VIV-086,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0230,COM-087,Iluminacion,14,15,True,6.29
+EQ-0231,COM-087,Computacion,3,150,True,8.0
+EQ-0232,COM-088,Iluminacion,17,15,True,7.29
+EQ-0233,COM-088,Refrigeracion,4,750,False,24.0
+EQ-0234,COM-089,Iluminacion,18,15,True,7.0
+EQ-0235,COM-089,Computacion,7,150,True,8.0
+EQ-0236,COM-090,Iluminacion,19,15,True,5.45
+EQ-0237,COM-090,Refrigeracion,4,750,False,24.0
+EQ-0238,COM-091,Iluminacion,15,15,True,6.16
+EQ-0239,COM-091,Computacion,7,150,True,8.0
+EQ-0240,COM-092,Iluminacion,19,15,True,7.41
+EQ-0241,COM-092,Refrigeracion,3,750,False,24.0
+EQ-0242,COM-093,Iluminacion,26,15,True,7.07
+EQ-0243,COM-093,Refrigeracion,2,750,False,24.0
+EQ-0244,VIV-094,Iluminacion,17,15,True,5.01
+EQ-0245,VIV-094,Refrigeracion,1,350,False,24.0
+EQ-0246,VIV-094,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0247,COM-095,Iluminacion,21,15,True,6.99
+EQ-0248,COM-095,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0249,COM-095,Climatizacion,2,2500,True,10.0
+EQ-0250,VIV-096,Iluminacion,19,15,True,5.85
+EQ-0251,VIV-096,Refrigeracion,1,350,False,24.0
+EQ-0252,VIV-096,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0253,VIV-097,Iluminacion,24,15,True,7.43
+EQ-0254,VIV-097,Refrigeracion,1,350,False,24.0
+EQ-0255,VIV-097,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0256,VIV-098,Iluminacion,24,15,True,7.12
+EQ-0257,VIV-098,Refrigeracion,1,180,True,24.0
+EQ-0258,VIV-098,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0259,COM-099,Iluminacion,16,15,True,5.52
+EQ-0260,COM-099,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0261,COM-099,Climatizacion,2,2500,True,10.0
+EQ-0262,VIV-100,Iluminacion,11,15,True,5.48
+EQ-0263,VIV-100,Refrigeracion,1,350,False,24.0
+EQ-0264,VIV-100,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0265,VIV-101,Iluminacion,18,15,True,6.19
+EQ-0266,VIV-101,Refrigeracion,1,350,False,24.0
+EQ-0267,VIV-101,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0268,COM-102,Iluminacion,22,15,True,7.31
+EQ-0269,COM-102,Refrigeracion,2,750,False,24.0
+EQ-0270,COM-103,Iluminacion,26,15,True,5.28
+EQ-0271,COM-103,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0272,COM-103,Climatizacion,2,2500,True,10.0
+EQ-0273,COM-104,Iluminacion,10,15,True,7.29
+EQ-0274,COM-104,Computacion,9,150,True,8.0
+EQ-0275,COM-105,Iluminacion,14,15,True,7.2
+EQ-0276,COM-105,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0277,COM-105,Climatizacion,2,2500,False,10.0
+EQ-0278,COM-106,Iluminacion,28,15,True,6.9
+EQ-0279,COM-106,Refrigeracion,3,750,False,24.0
+EQ-0280,VIV-107,Iluminacion,17,15,True,6.88
+EQ-0281,VIV-107,Refrigeracion,1,350,False,24.0
+EQ-0282,VIV-107,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0283,VIV-108,Iluminacion,22,15,True,5.07
+EQ-0284,VIV-108,Refrigeracion,1,180,True,24.0
+EQ-0285,VIV-108,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0286,COM-109,Iluminacion,29,15,True,5.57
+EQ-0287,COM-109,Refrigeracion,2,750,False,24.0
+EQ-0288,COM-110,Iluminacion,28,15,True,7.02
+EQ-0289,COM-110,Computacion,10,150,True,8.0
+EQ-0290,VIV-111,Iluminacion,23,15,True,5.43
+EQ-0291,VIV-111,Refrigeracion,1,180,True,24.0
+EQ-0292,VIV-111,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0293,VIV-112,Iluminacion,26,15,True,5.82
+EQ-0294,VIV-112,Refrigeracion,1,180,True,24.0
+EQ-0295,VIV-112,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0296,COM-113,Iluminacion,12,15,True,7.9
+EQ-0297,COM-113,Coccion y Procesamiento,2,2000,False,6.0
+EQ-0298,COM-113,Climatizacion,2,2500,True,10.0
+EQ-0299,COM-114,Iluminacion,19,15,True,6.96
+EQ-0300,COM-114,Computacion,10,150,True,8.0
+EQ-0301,VIV-115,Iluminacion,26,15,True,6.15
+EQ-0302,VIV-115,Refrigeracion,1,180,True,24.0
+EQ-0303,VIV-115,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0304,COM-116,Iluminacion,19,15,True,6.51
+EQ-0305,COM-116,Computacion,8,150,True,8.0
+EQ-0306,VIV-117,Iluminacion,19,15,True,7.51
+EQ-0307,VIV-117,Refrigeracion,1,350,False,24.0
+EQ-0308,VIV-117,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0309,VIV-118,Iluminacion,17,15,True,5.53
+EQ-0310,VIV-118,Refrigeracion,1,350,False,24.0
+EQ-0311,VIV-118,Otros / Fuerza Motriz,1,1200,False,1.5
+EQ-0312,COM-119,Iluminacion,17,15,True,5.88
+EQ-0313,COM-119,Refrigeracion,3,750,False,24.0
+EQ-0314,COM-120,Iluminacion,29,15,True,6.16
+EQ-0315,COM-120,Refrigeracion,2,750,False,24.0
