@@ -29,7 +29,7 @@ lista_paises = list(paises_config.keys())
 
 # ---------------------------------------------------------
 # CANTIDAD DE REGISTROS A SIMULAR
-num_inmuebles = 120
+num_inmuebles = 5000
 establecimientos_data = []
 
 # ---------------------------------------------------------
@@ -40,13 +40,13 @@ for i in range(1, num_inmuebles + 1):
     pais = random.choice(lista_paises)
     
     if tipo == "Vivienda":
-        id_inmueble = f"VIV-{i:03d}"
+        id_inmueble = f"VIV-{i:05d}"
         categoria = "No Aplica"
         m2 = int(np.random.normal(90, 25))  # Promedio 90m2
         m2 = max(40, min(m2, 250))          # Límites lógicos
         habitantes_empleados = random.randint(1, 6)
     else:
-        id_inmueble = f"COM-{i:03d}"
+        id_inmueble = f"COM-{i:05d}"
         categoria = random.choice(["Categoria A", "Categoria B", "Categoria C"])
         habitantes_empleados = random.randint(2, 12) # En comercios representan empleados
         if categoria == "Categoria A":
@@ -70,36 +70,36 @@ equipo_id_counter = 1
 
 for idx, row in df_establecimientos.iterrows():
     # 1. ILUMINACION: Obligatorio para el 100% de los inmuebles
-    equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Iluminacion", random.randint(10, 30), 15, True, round(random.uniform(5, 8), 2)])
+    equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Iluminacion", random.randint(10, 30), 15, True, round(random.uniform(5, 8), 2)])
     equipo_id_counter += 1
     
     if row['tipo_establecimiento'] == "Vivienda":
         # 2. REFRIGERACION: Nevera hogareña
         inv = random.choice([True, False])
-        equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Refrigeracion", 1, 350 if not inv else 180, inv, 24.0])
+        equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Refrigeracion", 1, 350 if not inv else 180, inv, 24.0])
         equipo_id_counter += 1
         
         # 3. OTROS/FUERZA MOTRIZ: Lavadora/Plancha (Cargas típicas del hogar)
-        equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Otros / Fuerza Motriz", 1, 1200, False, 1.5])
+        equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Otros / Fuerza Motriz", 1, 1200, False, 1.5])
         equipo_id_counter += 1
         
     else: # Es un Comercio
         if row['categoria_comercio'] == "Categoria A": # Oficinas
             # 4. COMPUTACION: Estaciones de trabajo
-            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Computacion", row['habitantes_empleados'], 150, True, 8.0])
+            equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Computacion", row['habitantes_empleados'], 150, True, 8.0])
             equipo_id_counter += 1
             
         elif row['categoria_comercio'] == "Categoria B": # Restaurantes
             # 5. COCCION Y PROCESAMIENTO: Hornos/Freidoras
-            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Coccion y Procesamiento", 2, 2000, False, 6.0])
+            equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Coccion y Procesamiento", 2, 2000, False, 6.0])
             equipo_id_counter += 1
             # 6. CLIMATIZACION: Confort del salón
-            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Climatizacion", 2, 2500, random.choice([True, False]), 10.0])
+            equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Climatizacion", 2, 2500, random.choice([True, False]), 10.0])
             equipo_id_counter += 1
             
         elif row['categoria_comercio'] == "Categoria C": # Abarrotes
             # REFRIGERACION INDUSTRIAL: Vitrinas continuas
-            equipos_data.append([f"EQ-{equipo_id_counter:04d}", row['id_inmueble'], "Refrigeracion", random.randint(2, 4), 750, False, 24.0])
+            equipos_data.append([f"EQ-{equipo_id_counter:05d}", row['id_inmueble'], "Refrigeracion", random.randint(2, 4), 750, False, 24.0])
             equipo_id_counter += 1
 
 df_equipos = pd.DataFrame(equipos_data, columns=[
@@ -114,18 +114,40 @@ curva_id_counter = 1
 
 for idx, row in df_establecimientos.iterrows():
     if row['tipo_establecimiento'] == "Vivienda":
-        dist = [0.15, 0.20, 0.25, 0.40] # Concentrado en la noche
+        # Ruido para perfil residencial (Pico en la Noche)
+        p_mad = random.uniform(0.08, 0.16)
+        p_man = random.uniform(0.12, 0.22)
+        p_tar = random.uniform(0.18, 0.28)
+        p_noc = 1.0 - (p_mad + p_man + p_tar)
+        dist = [round(p_mad, 2), round(p_man, 2), round(p_tar, 2), round(p_noc, 2)]
     else:
         if row['categoria_comercio'] == "Categoria A":
-            dist = [0.05, 0.45, 0.40, 0.10] # Concentrado en horario de oficina (Manana/Tarde)
+            # Ruido para oficinas (Pico en Mañana/Tarde)
+            p_mad = random.uniform(0.02, 0.08)
+            p_man = random.uniform(0.40, 0.50)
+            p_tar = random.uniform(0.38, 0.46)
+            p_noc = 1.0 - (p_mad + p_man + p_tar)
+            dist = [round(p_mad, 2), round(p_man, 2), round(p_tar, 2), round(p_noc, 2)]
         elif row['categoria_comercio'] == "Categoria B":
-            dist = [0.10, 0.30, 0.45, 0.15] # Pico en la tarde/comida
+            # Ruido para restaurantes (Pico en la Tarde)
+            p_mad = random.uniform(0.04, 0.12)
+            p_man = random.uniform(0.22, 0.32)
+            p_tar = random.uniform(0.40, 0.50)
+            p_noc = 1.0 - (p_mad + p_man + p_tar)
+            dist = [round(p_mad, 2), round(p_man, 2), round(p_tar, 2), round(p_noc, 2)]
         else:
-            dist = [0.25, 0.25, 0.25, 0.25] # Abarrotes: Plano por refrigeración continua
+            # Ruido para abarrotados (Perfil continuo/plano)
+            p_mad = random.uniform(0.22, 0.28)
+            p_man = random.uniform(0.22, 0.28)
+            p_tar = random.uniform(0.22, 0.28)
+
+    p_noc = 1.0 - (p_mad + p_man + p_tar)
+    dist = [p_mad, p_man, p_tar, p_noc]
+    dist = [round(x / sum(dist), 4) for x in dist]
             
     franjas = ["Madrugada", "Manana", "Tarde", "Noche"]
     for f, p in zip(franjas, dist):
-        curva_data.append([f"C-{curva_id_counter:04d}", row['id_inmueble'], f, p])
+        curva_data.append([f"C-{curva_id_counter:05d}", row['id_inmueble'], f, p])
         curva_id_counter += 1
 
 df_curva = pd.DataFrame(curva_data, columns=["id_curva", "id_inmueble", "franja_horaria", "porcentaje_distribucion"])
@@ -176,7 +198,7 @@ for idx, row in df_establecimientos.iterrows():
     costo_usd = kwh_mes * TARIFA_USD_REF
     costo_moneda_local = round(costo_usd * tipo_cambio, 2)
     
-    consumo_data.append([f"REG-{reg_id_counter:04d}", row['id_inmueble'], "2026-07-01", kwh_mes, costo_moneda_local, perfil])
+    consumo_data.append([f"REG-{reg_id_counter:05d}", row['id_inmueble'], "2026-07-01", kwh_mes, costo_moneda_local, perfil])
     reg_id_counter += 1
 
 df_consumo = pd.DataFrame(consumo_data, columns=[
