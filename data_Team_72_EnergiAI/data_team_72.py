@@ -42,6 +42,7 @@ for i in range(1, num_inmuebles + 1):
     if tipo == "Vivienda":
         id_inmueble = f"VIV-{i:05d}"
         categoria = "No Aplica"
+        # Se usa una distribución normal (campana de Gauss) con media de 90 m2 y desviación estándar de 25
         m2 = int(np.random.normal(90, 25))  # Promedio 90m2
         m2 = max(40, min(m2, 250))          # Límites lógicos
         habitantes_empleados = random.randint(1, 6)
@@ -49,13 +50,14 @@ for i in range(1, num_inmuebles + 1):
         id_inmueble = f"COM-{i:05d}"
         categoria = random.choice(["Categoria A", "Categoria B", "Categoria C"])
         habitantes_empleados = random.randint(2, 12) # En comercios representan empleados
+        # Se genera un número aleatorio entero segun categoria de comercio
         if categoria == "Categoria A":
             m2 = random.randint(30, 120)
         elif categoria == "Categoria B":
             m2 = random.randint(45, 150)
         else:
             m2 = random.randint(25, 80)
-            
+    # Guardar todos los tipos de inmueble 
     establecimientos_data.append([id_inmueble, tipo, categoria, m2, habitantes_empleados, pais])
 
 df_establecimientos = pd.DataFrame(establecimientos_data, columns=[
@@ -105,6 +107,11 @@ for idx, row in df_establecimientos.iterrows():
 df_equipos = pd.DataFrame(equipos_data, columns=[
     "id_equipo", "id_inmueble", "tipo_equipo", "cantidad_equipos", "potencia_watts", "tecnologia_inverter", "horas_uso_estimadas_dia"
 ])
+
+# Convertir watts hora a kilowatts hora (kWh) división *1000
+df_equipos['consumo_kwh_dia_equipo'] = (
+    df_equipos['cantidad_equipos'] * df_equipos['potencia_watts'] * df_equipos['horas_uso_estimadas_dia'] / 1000.0
+).round(4)
 
 # ---------------------------------------------------------
 # CREAR TABLA CURVA_CARGA_HORARIA 
@@ -159,53 +166,59 @@ consumo_data = []
 reg_id_counter = 1
 TARIFA_USD_REF = 0.75 # Tarifa estandarizada del proyecto ($0.75 USD)
 
+# Sumar directamente la columna redondeada df_equipos['consumo_kwh_dia_equipo']
+consumo_diario_por_inmueble = df_equipos.groupby('id_inmueble')['consumo_kwh_dia_equipo'].sum().to_dict()
+
+# Generar consumo mensual en base a la suma real de sus equipos
 for idx, row in df_establecimientos.iterrows():
+    id_inm = row['id_inmueble']
     pais = row['pais_ubicacion']
+    config_pais = paises_config[pais]
+    moneda_local = config_pais["moneda"]
     tipo_cambio = paises_config[pais]["tipo_cambio_usd"]
 
-    # Valores de control por defecto
-    kwh_mes = 0.0
-    perfil = "Moderado"
+    # Consumo real proveniente de la suma de sus equipos
+    kwh_dia = consumo_diario_por_inmueble.get(id_inm, 0.0)
+    kwh_mes = round(kwh_dia * 30, 2)
     
-    # Simulación de Consumo en base a las reglas cuantitativas
+    # Determinación del perfil basado en las reglas del negocio
     if row['tipo_establecimiento'] == "Vivienda":
-        kwh_dia = round(random.uniform(2.2, 9.5), 2)
-        kwh_mes = round(kwh_dia * 30, 2)
         if kwh_dia < 3.5: perfil = "Eficiente"
         elif 3.5 <= kwh_dia <= 7.0: perfil = "Moderado"
         else: perfil = "Ineficiente"
     else:
         m2 = row['superficie_m2']
+        ie = kwh_mes / m2 if m2 > 0 else 0  # Intensidad Energética kWh/m2
+        
         if row['categoria_comercio'] == "Categoria A":
-            ie = random.uniform(6, 22)
             if ie < 8: perfil = "Eficiente"
             elif 8 <= ie <= 15: perfil = "Moderado"
             else: perfil = "Ineficiente"
         elif row['categoria_comercio'] == "Categoria B":
-            ie = random.uniform(35, 80)
             if ie < 40: perfil = "Eficiente"
             elif 40 <= ie <= 65: perfil = "Moderado"
             else: perfil = "Ineficiente"
         else:
-            ie = random.uniform(65, 125)
             if ie < 70: perfil = "Eficiente"
             elif 70 <= ie <= 110: perfil = "Moderado"
             else: perfil = "Ineficiente"
             
-        kwh_mes = round(ie * m2, 2)
-        
-    # Estructuración Matemática Financiera Regionalizada
-    costo_usd = kwh_mes * TARIFA_USD_REF
+    # Estructuración Financiera, calculo USD y moneda local
+    costo_usd = round(kwh_mes * TARIFA_USD_REF, 2)
     costo_moneda_local = round(costo_usd * tipo_cambio, 2)
     
-    consumo_data.append([f"REG-{reg_id_counter:05d}", row['id_inmueble'], "2026-07-01", kwh_mes, costo_moneda_local, perfil])
+    consumo_data.append([
+        f"REG-{reg_id_counter:05d}", id_inm, "2026-07-01", 
+        kwh_mes, costo_usd, costo_moneda_local, moneda_local, perfil
+    ])
     reg_id_counter += 1
 
 df_consumo = pd.DataFrame(consumo_data, columns=[
-    "id_registro", "id_inmueble", "anio_mes_dd", "consumo_kwh_mes", "costo_factura", "perfil_calculado"
+    "id_registro", "id_inmueble", "anio_mes_dd", 
+    "consumo_kwh_mes", "costo_factura_usd", "costo_factura_moneda_local", "codigo_moneda", "perfil_calculado"
 ])
 
-# ---------------------------------------------------------
+# -------------------------------------------------------
 # ALMACENAMIENTO Y EXPORTACIÓN A CSV
 
 df_establecimientos.to_csv("establecimientos.csv", index=False)
