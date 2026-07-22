@@ -29,3 +29,14 @@ target/
 # IntelliJ IDEA
 .idea/
 *.iml
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/

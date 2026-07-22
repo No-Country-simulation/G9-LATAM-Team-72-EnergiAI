@@ -4,7 +4,7 @@ from service import predict
 
 app = FastAPI(
     title="EnergiAI ML Service",
-    description="Servicio de predicción del modelo de IA",
+    description="Servicio de predicción del modelo de ML",
 )
 
 @app.get("/")
