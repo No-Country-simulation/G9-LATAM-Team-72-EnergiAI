@@ -1,3 +1,4 @@
+from typing import List
 from pydantic import BaseModel
 
 class PredictionRequest(BaseModel):
@@ -10,4 +11,4 @@ class PredictionRequest(BaseModel):
 class PredictionResponse(BaseModel):
     categoria: str
     probabilidad: float
-    recomendaciones: str
+    recomendaciones: List[str]

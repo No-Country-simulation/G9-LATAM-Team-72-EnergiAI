@@ -12,7 +12,8 @@ public class AnalisisEnergeticoController {
 
     private final AnalisisEnergeticoService service;
 
-    public AnalisisEnergeticoController(AnalisisEnergeticoService service) {
+    public AnalisisEnergeticoController(AnalisisEnergeticoService service)
+    {
         this.service = service;
     }
 
@@ -30,6 +31,7 @@ public class AnalisisEnergeticoController {
      */
     @PostMapping("/analisis-energetico")
     public AnalisisResponse analizar(@Valid @RequestBody AnalisisRequest request) {
+
         return service.analizar(request);
     }
 

@@ -1,26 +1,13 @@
 package com.team72.energiai.api.dto;
 
-import jakarta.validation.constraints.*;
 import lombok.Data;
 
 @Data
-public class AnalisisRequest {
+public class MLRequest {
 
-    @NotNull
-    @Positive
     private Double consumoKwh;
-
-    @NotNull
     private Boolean usoHorarioPico;
-
-    @NotNull
-    @Positive
     private Integer cantidadEquipos;
-
-    @NotBlank
     private String tipoInmueble;
-
-    @NotNull
-    @PositiveOrZero
     private Integer horasAltoConsumo;
 }
