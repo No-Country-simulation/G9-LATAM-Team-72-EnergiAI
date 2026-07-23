@@ -12,7 +12,7 @@ EnergiAI es una solución integral diseñada para transformar la manera en que l
 ---
 
 ## 🛠️ Arquitectura de la Solución
-
+```
 La plataforma se estructura en tres capas principales:
 
 ┌─────────────────────────────────────────┐
@@ -34,6 +34,7 @@ La plataforma se estructura en tres capas principales:
 │  │ Compute Instance | Virtual Cloud Network (VCN) | Security Rules  │   │
 │  └──────────────────────────────────────────────────────────────────┘   │
 └─────────────────────────────────────────────────────────────────────────┘
+```
 
 1. **Data Science & ML:** Pipeline completo de Análisis Exploratorio de Datos (EDA), limpieza, tratamiento de variables y entrenamiento de modelos supervisados para clasificar el perfil de eficiencia (Eficiente, Moderado, Ineficiente).
 2. **Backend API:** Servicio REST desarrollado en Java / Spring Boot que recibe la información del inmueble, consulta la inferencia del modelo y devuelve la categoría junto con su probabilidad.
@@ -60,7 +61,7 @@ El servicio REST desarrollado en Spring Boot expondrá un endpoint para el anál
 * **Salida (Response):** Clasificación del nivel de eficiencia (`Eficiente`, `Moderado`, `Ineficiente`), probabilidad del modelo de ML y recomendaciones de optimización.
 
 ---
-
+```
 ⚙️ Estructura del Repositorio
 
 G9-LATAM-Team-72-EnergiAI/
@@ -71,6 +72,7 @@ G9-LATAM-Team-72-EnergiAI/
 ├── Project Hackaton ONE - G9 Team 72.pdf  # Brief y presentación oficial del proyecto
 ├── Team72_Energi_AI_Sprint_Planner.xlsx   # Planificador de Sprints y entregables
 └── README.md                             # Documentación principal
+```
 
 ---
 
