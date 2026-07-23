@@ -94,4 +94,4 @@ Lorena Bustos Castañeda (Backend Developer)
 
 📄 Licencia
 
-Este proyecto se desarrolla en el marco del Hackathon ONE G9 LATAM organizado por No Country, Oracle y Alura Latam.
+Este proyecto se desarrolla en el marco del Hackathon ONE G9 LATAM organizado por No Country, Oracle y Alura Latam
