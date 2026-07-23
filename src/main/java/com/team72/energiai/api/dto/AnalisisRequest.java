@@ -5,12 +5,12 @@ import jakarta.validation.constraints.NotNull;
 
 public class AnalisisRequest {
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "El consumo mensual es obligatorio.")
+    @Min(value = 1, message = "El consumo mensual debe ser mayor que cero.")
     private Double consumoMensual;
 
-    @NotNull
-    @Min(1)
+    @NotNull(message = "La cantidad de equipos es obligatoria.")
+    @Min(value = 1, message = "La cantidad de equipos debe ser mayor que cero.")
     private Integer cantidadEquipos;
 
     public Double getConsumoMensual() {
@@ -28,5 +28,4 @@ public class AnalisisRequest {
     public void setCantidadEquipos(Integer cantidadEquipos) {
         this.cantidadEquipos = cantidadEquipos;
     }
-
 }
