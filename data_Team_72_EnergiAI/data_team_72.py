@@ -1,6 +1,6 @@
 # G9-LATAM-Team-72-EnergiAI
 # Simulación de Datos - Equipo Data Science
-# Versión 1.0
+# Versión 1.1
 
 # ---------------------------------------------------------
 # IMPORTAR LIBRERIAS
