@@ -1,6 +1,6 @@
 # G9-LATAM-Team-72-EnergiAI
 # Simulación de Datos - Equipo Data Science
-# Versión 1.1
+# Versión 1.3 (Ajuste variables calculadas, total de registros 120 a 5000, ajuste %75 vivienda y 25% comercios)
 
 # ---------------------------------------------------------
 # IMPORTAR LIBRERIAS
@@ -33,10 +33,12 @@ num_inmuebles = 5000
 establecimientos_data = []
 
 # ---------------------------------------------------------
-# CREAR TABLA ESTABLECIMIENTOS
+# CREAR TABLA ESTABLECIMIENTOS (75% Vivienda / 25% Comercio)
+# Generación ponderada según la probabilidad deseada
+tipos_inmuebles = np.random.choice(["Vivienda", "Comercio"], size=num_inmuebles, p=[0.75, 0.25])
 
-for i in range(1, num_inmuebles + 1):
-    tipo = random.choice(["Vivienda", "Comercio"])
+for i in range(num_inmuebles):
+    tipo = tipos_inmuebles[i]
     pais = random.choice(lista_paises)
     
     if tipo == "Vivienda":
@@ -66,7 +68,6 @@ df_establecimientos = pd.DataFrame(establecimientos_data, columns=[
 
 # ---------------------------------------------------------
 # CREAR TABLA INVENTARIO_EQUIPOS
-
 equipos_data = []
 equipo_id_counter = 1
 
@@ -115,7 +116,6 @@ df_equipos['consumo_kwh_dia_equipo'] = (
 
 # ---------------------------------------------------------
 # CREAR TABLA CURVA_CARGA_HORARIA 
-
 curva_data = []
 curva_id_counter = 1
 
@@ -161,7 +161,6 @@ df_curva = pd.DataFrame(curva_data, columns=["id_curva", "id_inmueble", "franja_
 
 # ---------------------------------------------------------
 # CREAR TABLA CONSUMO_MENSUAL
-
 consumo_data = []
 reg_id_counter = 1
 TARIFA_USD_REF = 0.75 # Tarifa estandarizada del proyecto ($0.75 USD)
@@ -220,7 +219,6 @@ df_consumo = pd.DataFrame(consumo_data, columns=[
 
 # -------------------------------------------------------
 # ALMACENAMIENTO Y EXPORTACIÓN A CSV
-
 df_establecimientos.to_csv("establecimientos.csv", index=False)
 df_equipos.to_csv("inventario_equipos.csv", index=False)
 df_curva.to_csv("curva_carga_horaria.csv", index=False)
