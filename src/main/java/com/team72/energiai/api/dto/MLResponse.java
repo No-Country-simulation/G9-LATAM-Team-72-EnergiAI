@@ -5,9 +5,9 @@ import lombok.Data;
 import java.util.List;
 
 @Data
-public class AnalisisResponse {
+public class MLResponse {
 
     private String categoria;
     private Double probabilidad;
-    private List<String>  recomendaciones;
+    private List<String> recomendaciones;
 }
