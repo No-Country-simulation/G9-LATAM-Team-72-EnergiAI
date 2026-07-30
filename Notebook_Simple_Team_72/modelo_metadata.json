@@ -1,0 +1,18 @@
+{
+  "modelo": "Random Forest",
+  "features_entrada": {
+    "consumo_kwh": "float (kWh/mes)",
+    "uso_horario_pico": "bool",
+    "cantidad_equipos": "int",
+    "tipo_inmueble": "str ('Casa' | 'Comercio')",
+    "horas_alto_consumo": "int (0-24)",
+    "superficie_m2": "float (requerido para comercios)"
+  },
+  "clases_salida": [
+    "Eficiente",
+    "Moderado",
+    "Ineficiente"
+  ],
+  "test_accuracy": 98.5,
+  "f1_macro": 0.985
+}
