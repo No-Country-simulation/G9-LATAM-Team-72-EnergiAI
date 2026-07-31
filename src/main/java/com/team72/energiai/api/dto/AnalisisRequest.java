@@ -6,21 +6,21 @@ import lombok.Data;
 @Data
 public class AnalisisRequest {
 
-    @NotNull
-    @Positive
+    @NotNull(message = "El consumo es obligatorio.")
+    @Positive(message = "El consumo debe ser mayor que cero.")
     private Double consumoKwh;
 
-    @NotNull
+    @NotNull(message = "Debe indicar si existe consumo en horario pico.")
     private Boolean usoHorarioPico;
 
-    @NotNull
-    @Positive
+    @NotNull(message = "La cantidad de equipos es obligatoria.")
+    @Positive(message = "La cantidad de equipos debe ser mayor que cero.")
     private Integer cantidadEquipos;
 
-    @NotBlank
+    @NotBlank(message = "El tipo de inmueble es obligatorio.")
     private String tipoInmueble;
 
-    @NotNull
-    @PositiveOrZero
+    @NotNull(message = "Las horas de alto consumo son obligatorias.")
+    @PositiveOrZero(message = "Las horas de alto consumo no pueden ser negativas.")
     private Integer horasAltoConsumo;
 }

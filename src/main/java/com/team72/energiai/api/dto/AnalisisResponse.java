@@ -8,6 +8,11 @@ import java.util.List;
 public class AnalisisResponse {
 
     private String categoria;
+
     private Double probabilidad;
-    private List<String>  recomendaciones;
+
+    private Double costoEstimadoMensual;
+
+    private List<String> recomendaciones;
+
 }
