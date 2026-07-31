@@ -10,19 +10,23 @@ import org.springframework.stereotype.Service;
 public class AnalisisEnergeticoService {
 
     private final MLService mlService;
+    private final CalculoFinancieroService calculoFinancieroService;
 
-    public AnalisisEnergeticoService(MLService mlService) {
+    public AnalisisEnergeticoService(
+            MLService mlService,
+            CalculoFinancieroService calculoFinancieroService) {
 
         this.mlService = mlService;
+        this.calculoFinancieroService = calculoFinancieroService;
     }
 
     public String obtenerEstado() {
-
         return "Servicio EnergiAI activo";
     }
 
     public AnalisisResponse analizar(AnalisisRequest request) {
-        //crear la peticion para FastAPI
+
+        // Crear petición para FastAPI
         MLRequest mlRequest = new MLRequest();
 
         mlRequest.setConsumoKwh(request.getConsumoKwh());
@@ -31,22 +35,22 @@ public class AnalisisEnergeticoService {
         mlRequest.setTipoInmueble(request.getTipoInmueble());
         mlRequest.setHorasAltoConsumo(request.getHorasAltoConsumo());
 
-        //llamar al servicio de ML
+        // Llamar al modelo de Machine Learning
         MLResponse mlResponse = mlService.predict(mlRequest);
 
-        //construir la respuesta del backend
+        // Calcular costo mensual en USD
+        Double costoMensual = calculoFinancieroService.calcularCostoMensualUSD(
+                request.getConsumoKwh()
+        );
+
+        // Construir respuesta
         AnalisisResponse response = new AnalisisResponse();
 
         response.setCategoria(mlResponse.getCategoria());
         response.setProbabilidad(mlResponse.getProbabilidad());
+        response.setCostoEstimadoMensual(costoMensual);
         response.setRecomendaciones(mlResponse.getRecomendaciones());
 
         return response;
-/*
-        // Respuesta simulada (Mock) para Sprint 1
-        response.setCategoria("Moderado");
-        response.setCostoEstimadoMensual(315.00);
-        response.setRecomendacion("Reducir el consumo durante las horas de mayor demanda.");
- */
     }
 }
