@@ -40,3 +40,6 @@ __pycache__/
 venv/
 .venv/
 env/
+
+#model
+ml_service/models/
