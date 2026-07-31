@@ -1,0 +1,36 @@
+# -----------------------------------------------------------
+# IMPORTAR LIBRERIAS
+import json
+
+def actualizar_metadata():
+    # Definición exacta de la metadata del modelo de Machine Learning y contrato de API
+    metadata = {
+        "modelo": "Random Forest Classifier",
+        "version": "1.0.0",
+        "tarifa_referencia_kwh": 0.75,
+        "features_entrada": {
+            "consumo_kwh": "float (Consumo mensual total en kWh)",
+            "uso_horario_pico": "bool (Indica si hay alto consumo en horas pico)",
+            "cantidad_equipos": "int (Número total de equipos declarados)",
+            "tipo_inmueble": "str ('Casa' | 'Comercio')",
+            "horas_alto_consumo": "int (Horas promedio de uso intensivo al día, 0-24)",
+            "superficie_m2": "float (Superficie en m2, requerido/relevante para Comercio)"
+        },
+        "clases_salida": [
+            "Eficiente",
+            "Moderado",
+            "Ineficiente"
+        ],
+        "test_accuracy": 98.5,
+        "f1_macro": 0.985
+    }
+
+    # Guardar / Sobrescribir el archivo JSON de metadata
+    output_path = "modelo_metadata.json"
+    with open(output_path, "w", encoding="utf-8") as f:
+        json.dump(metadata, f, indent=4, ensure_ascii=False)
+
+    print(f"[OK] Archivo '{output_path}' actualizado exitosamente.")
+
+if __name__ == "__main__":
+    actualizar_metadata()

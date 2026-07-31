@@ -1,7 +1,10 @@
 ﻿segmento,perfil_calculado,condicion,diagnostico,recomendacion
-Viviendas,Cualquiera,franja_mayor_uso == 'Noche',Concentración de demanda en la hora pico,Desplazamiento de Carga: Mueva los ciclos de mayor consumo fuera de la hora pico.
-Viviendas,Moderado / Ineficiente,porcentaje_distribucion_madrugada > 0.16,El consumo basal nocturno supera la línea base,Corte de Consumo Vampiro: Se detectó una fuga estática en la madrugada.
-Viviendas,Moderado / Ineficiente,tecnologia_inverter == False and tipo_equipo == 'Refrigeracion',Presencia de un refrigerador de motor convencional,Sustitución Tecnológica Frigorífica: Su nevera consume más de lo óptimo.
-Viviendas,Ineficiente,horas_uso_estimadas_dia > 12.0 and tipo_equipo == 'Climatizacion',Uso prolongado o a baja temperatura de aire acondicionado,Optimización de Climatización: Fije el aire acondicionado a 24°C.
-Comercio,Cualquiera,franja_mayor_uso == 'Mañana',Alta simultaneidad de encendido en la apertura,Secuenciación de Encendido: Evite encender todos los equipos al mismo tiempo.
-Comercio,Moderado / Ineficiente,porcentaje_distribucion_noche > 0.15,Consumo residual elevado tras el cierre de operaciones,Protocolo de Cierre Eléctrico: Desarrolle una lista de chequeo de apagado nocturno.
+Casa,Cualquiera,uso_horario_pico == True,Concentración de demanda en la hora pico,Reducir el uso de equipos durante los horarios pico
+Casa,Moderado / Ineficiente,(consumo_kwh / 30.0) > 12.36 and horas_alto_consumo > 6,El consumo basal nocturno supera la línea base,Distribuir las actividades de mayor consumo a lo largo del día
+Casa,Moderado / Ineficiente,(consumo_kwh / cantidad_equipos) > 40.0,Presencia de electrodomésticos de alta intensidad de consumo,Evaluar equipos con alto consumo energético
+Casa,Ineficiente,horas_alto_consumo > 10,Uso prolongado de sistemas de climatización o alto consumo,Optimizar el tiempo de uso continuo de electrodomésticos
+Casa,Ineficiente,cantidad_equipos >= 3 and (consumo_kwh / 30.0) > 15.0,Consumo elevado por equipos térmicos o calentadores,Instalar temporizadores o ajustar la temperatura de calentadores
+Comercio,Moderado / Ineficiente,uso_horario_pico == False and horas_alto_consumo > 10,Alta simultaneidad de encendido en la apertura,Secuenciar el encendido de maquinaria y equipos en la apertura
+Comercio,Moderado / Ineficiente,uso_horario_pico == True and horas_alto_consumo > 8,Consumo residual elevado tras el cierre de operaciones,Implementar un protocolo de cierre y apagado de cargas nocturnas
+Comercio,Ineficiente,horas_alto_consumo > 12 and (consumo_kwh / cantidad_equipos) > 60.0,Uso de tecnologías de iluminación o equipos ineficientes,Modernizar la iluminación a tecnología LED y reemplazar equipos obsoletos
+Comercio,Ineficiente,superficie_m2 > 0 and (consumo_kwh / superficie_m2) > 22.76,Alta densidad de consumo por metro cuadrado,Realizar auditoría térmica y mejorar el aislamiento del establecimiento
