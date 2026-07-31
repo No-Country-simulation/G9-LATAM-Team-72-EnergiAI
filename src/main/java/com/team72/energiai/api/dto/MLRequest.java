@@ -10,4 +10,5 @@ public class MLRequest {
     private Integer cantidadEquipos;
     private String tipoInmueble;
     private Integer horasAltoConsumo;
+    private Double superficieM2;
 }

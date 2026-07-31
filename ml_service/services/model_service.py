@@ -19,6 +19,10 @@ def download_model_from_oci(url: str, output_path: str):
 
 #guardar modelo localmente si no existe
 def load_model():
+
+    # Crear la carpeta models si no existe
+    os.makedirs(os.path.dirname(LOCAL_FILENAME), exist_ok=True)
+
     if not os.path.exists(LOCAL_FILENAME):
         download_model_from_oci(OCI_MODEL_URL, LOCAL_FILENAME)
 

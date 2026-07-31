@@ -20,22 +20,18 @@ def predict(request: PredictionRequest) -> PredictionResponse:
         "horas_alto_consumo": request.horasAltoConsumo,
         "superficie_m2": request.superficieM2
     }])
+
     #obtener prediciones del ML
     prediccion = model.predict(datos)[0]
     probabilidades = model.predict_proba(datos)
     probabilidad = max(probabilidades[0])
 
-    #print(prediccion)
-
     # Datos para el motor de recomendaciones
     datos_dict = datos.iloc[0].to_dict()
     #Inyectamos la categoría calculada para evaluar el motor
     datos_dict["perfil_calculado"] = prediccion
-    #print(datos_dict)
-
     #generar recomendaciones
     lista_recomendaciones = motor_recomendaciones.evaluar_usuario(datos_dict)
-    print(lista_recomendaciones)
 
     #respuesta generada segun el Perfil Calculado
     return PredictionResponse(
