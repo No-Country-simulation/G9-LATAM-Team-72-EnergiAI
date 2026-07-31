@@ -1,4 +1,4 @@
-from schemas import PredictionRequest, PredictionResponse
+from ml_service.schemas.prediction import PredictionRequest, PredictionResponse
 
 def predict(request: PredictionRequest) -> PredictionResponse:
 
