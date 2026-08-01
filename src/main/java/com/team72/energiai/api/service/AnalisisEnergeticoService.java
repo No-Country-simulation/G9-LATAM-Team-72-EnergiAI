@@ -35,6 +35,12 @@ public class AnalisisEnergeticoService {
         mlRequest.setTipoInmueble(request.getTipoInmueble());
         mlRequest.setHorasAltoConsumo(request.getHorasAltoConsumo());
 
+        //valor por defecto para validaciones (Superficie en m2, requerido/relevante para Comercio)
+        if (request.getSuperficieM2() == null){
+            request.setSuperficieM2(0.0);
+        }
+        mlRequest.setSuperficieM2(request.getSuperficieM2());
+
         // Llamar al modelo de Machine Learning
         MLResponse mlResponse = mlService.predict(mlRequest);
 

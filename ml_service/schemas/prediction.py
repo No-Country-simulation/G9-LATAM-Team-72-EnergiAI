@@ -7,6 +7,7 @@ class PredictionRequest(BaseModel):
     cantidadEquipos: int
     tipoInmueble: str
     horasAltoConsumo: int
+    superficieM2: float
 
 class PredictionResponse(BaseModel):
     categoria: str

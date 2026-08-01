@@ -23,4 +23,6 @@ public class AnalisisRequest {
     @NotNull(message = "Las horas de alto consumo son obligatorias.")
     @PositiveOrZero(message = "Las horas de alto consumo no pueden ser negativas.")
     private Integer horasAltoConsumo;
+
+    private Double superficieM2;
 }
