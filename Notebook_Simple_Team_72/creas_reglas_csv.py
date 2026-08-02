@@ -51,9 +51,29 @@ def generar_archivos_reglas():
             "diagnostico": "Consumo elevado por equipos térmicos o calentadores",
             "recomendacion": "Instalar temporizadores o ajustar la temperatura de calentadores"
         },
-
+        {
+            "segmento": "Casa",
+            "perfil_calculado": "Eficiente",
+            "condicion": "uso_horario_pico == False and (consumo_kwh / 30.0) <= 9.21",
+            "diagnostico": "Desempeño óptimo y hábitos energéticos sostenibles",
+            "recomendacion": "Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.",
+        },
         # =============================================================
         # SEGMENTO: COMERCIO
+        {
+            "segmento": "Comercio",
+            "perfil_calculado": "Cualquiera",
+            "condicion": "uso_horario_pico == True",
+            "diagnostico": "Uso de potencia en bloques tarifarios altos",
+            "recomendacion": "Reducir el uso de equipos durante los horarios pico"
+        },
+        {
+            "segmento": "Comercio",
+            "perfil_calculado": "Moderado / Ineficiente",
+            "condicion": "uso_horario_pico == False and 6 < horas_alto_consumo <= 10",
+            "diagnostico": "Consumo residual elevado o jornadas operativas medias",
+            "recomendacion": "Implementar un protocolo de cierre y apagado de cargas nocturnas",
+        },
         {
             "segmento": "Comercio",
             "perfil_calculado": "Moderado / Ineficiente",
@@ -81,7 +101,28 @@ def generar_archivos_reglas():
             "condicion": "superficie_m2 > 0 and (consumo_kwh / superficie_m2) > 22.76",
             "diagnostico": "Alta densidad de consumo por metro cuadrado",
             "recomendacion": "Realizar auditoría térmica y mejorar el aislamiento del establecimiento"
-        }
+        },
+        {
+            "segmento": "Comercio",
+            "perfil_calculado": "Moderado / Ineficiente",
+            "condicion": "horas_alto_consumo <= 6 and (consumo_kwh / cantidad_equipos) > 30.0",
+            "diagnostico": "Consumo residual elevado o jornadas cortas con equipos intensivos",
+            "recomendacion": "Implementar un protocolo de cierre y apagado de cargas nocturnas",
+        },
+        {
+            "segmento": "Comercio",
+            "perfil_calculado": "Eficiente",
+            "condicion": "uso_horario_pico == False and superficie_m2 > 0 and (consumo_kwh / superficie_m2) <= 12.87",
+            "diagnostico": "Desempeño óptimo y hábitos energéticos sostenibles",
+            "recomendacion": "Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.",
+        },
+        {
+            "segmento": "Comercio",
+            "perfil_calculado": "Eficiente",
+            "condicion": "uso_horario_pico == False and superficie_m2 == 0",
+            "diagnostico": "Desempeño óptimo y hábitos energéticos sostenibles",
+            "recomendacion": "Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.",
+        },
     ]
 
     # 1. Exportar a CSV para documentación en Excel

@@ -4,7 +4,13 @@ Casa,Moderado / Ineficiente,(consumo_kwh / 30.0) > 12.36 and horas_alto_consumo 
 Casa,Moderado / Ineficiente,(consumo_kwh / cantidad_equipos) > 40.0,Presencia de electrodomésticos de alta intensidad de consumo,Evaluar equipos con alto consumo energético
 Casa,Ineficiente,horas_alto_consumo > 10,Uso prolongado de sistemas de climatización o alto consumo,Optimizar el tiempo de uso continuo de electrodomésticos
 Casa,Ineficiente,cantidad_equipos >= 3 and (consumo_kwh / 30.0) > 15.0,Consumo elevado por equipos térmicos o calentadores,Instalar temporizadores o ajustar la temperatura de calentadores
+Casa,Eficiente,uso_horario_pico == False and (consumo_kwh / 30.0) <= 9.21,Desempeño óptimo y hábitos energéticos sostenibles,Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.
+Comercio,Cualquiera,uso_horario_pico == True,Uso de potencia en bloques tarifarios altos,Reducir el uso de equipos durante los horarios pico
+Comercio,Moderado / Ineficiente,uso_horario_pico == False and 6 < horas_alto_consumo <= 10,Consumo residual elevado o jornadas operativas medias,Implementar un protocolo de cierre y apagado de cargas nocturnas
 Comercio,Moderado / Ineficiente,uso_horario_pico == False and horas_alto_consumo > 10,Alta simultaneidad de encendido en la apertura,Secuenciar el encendido de maquinaria y equipos en la apertura
 Comercio,Moderado / Ineficiente,uso_horario_pico == True and horas_alto_consumo > 8,Consumo residual elevado tras el cierre de operaciones,Implementar un protocolo de cierre y apagado de cargas nocturnas
 Comercio,Ineficiente,horas_alto_consumo > 12 and (consumo_kwh / cantidad_equipos) > 60.0,Uso de tecnologías de iluminación o equipos ineficientes,Modernizar la iluminación a tecnología LED y reemplazar equipos obsoletos
 Comercio,Ineficiente,superficie_m2 > 0 and (consumo_kwh / superficie_m2) > 22.76,Alta densidad de consumo por metro cuadrado,Realizar auditoría térmica y mejorar el aislamiento del establecimiento
+Comercio,Moderado / Ineficiente,horas_alto_consumo <= 6 and (consumo_kwh / cantidad_equipos) > 30.0,Consumo residual elevado o jornadas cortas con equipos intensivos,Implementar un protocolo de cierre y apagado de cargas nocturnas
+Comercio,Eficiente,uso_horario_pico == False and superficie_m2 > 0 and (consumo_kwh / superficie_m2) <= 12.87,Desempeño óptimo y hábitos energéticos sostenibles,Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.
+Comercio,Eficiente,uso_horario_pico == False and superficie_m2 == 0,Desempeño óptimo y hábitos energéticos sostenibles,Mantener hábitos de consumo actuales. No se detectan ineficiencias o fugas energéticas.

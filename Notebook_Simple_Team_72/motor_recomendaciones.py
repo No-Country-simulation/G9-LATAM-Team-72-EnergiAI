@@ -43,6 +43,9 @@ class MotorRecomendaciones:
             "perfil_calculado": str(datos_usuario.get("perfil_calculado", "Moderado"))
         }
 
+        # Entorno seguro para la evaluación sintáctica
+        eval_globals = {"__builtins__": None, "abs": abs, "bool": bool}
+
         segmento_usr = contexto["tipo_inmueble"]
         perfil_usr = contexto["perfil_calculado"]
         recomendaciones_activadas = []
@@ -52,26 +55,33 @@ class MotorRecomendaciones:
             if regla.get("segmento") != segmento_usr:
                 continue
 
-            # 2. Validar perfil calculado ('Cualquiera' o coincidencia parcial)
-            perfil_regla = str(regla.get("perfil_calculado", ""))
-            aplica_perfil = (perfil_regla == "Cualquiera") or (perfil_usr and perfil_usr in perfil_regla)
+            # 2. Validar perfil calculado con separación estricta
+            perfil_regla = str(regla.get("perfil_calculado", "")).strip()
+            
+            if perfil_regla == "Cualquiera":
+                aplica_perfil = True
+            else:
+                # Separa perfiles compuestos como "Moderado / Ineficiente" en listas
+                perfiles_permitidos = [p.strip() for p in perfil_regla.split("/")]
+                aplica_perfil = perfil_usr in perfiles_permitidos
 
             if not aplica_perfil:
                 continue
 
-            # 3. Evaluar la condición dinámica
+            # 3. Evaluar la condición dinámica con eval seguro
             condicion_str = regla.get("condicion", "")
             try:
-                if eval(condicion_str, {}, contexto):
-                    texto_rec = regla["recomendacion"]
-                    # Evitar duplicados en la lista de respuesta
-                    if texto_rec not in recomendaciones_activadas:
+            # Pasamos eval_globals para permitir funciones seguras (abs, bool)
+                if eval(condicion_str, eval_globals, contexto):
+                    texto_rec = regla.get("recomendacion", "").strip()
+                    
+                    # Guardar recomendación evitando duplicados
+                    if texto_rec and texto_rec not in recomendaciones_activadas:
                         recomendaciones_activadas.append(texto_rec)
             except Exception as e:
                 print(f"[WARN] Error al evaluar la condición '{condicion_str}': {e}")
 
         return recomendaciones_activadas
-
 # ===============================================================
 # PRUEBA DE FUNCIONAMIENTO LOCAL (POST /analisis-energetico)
 
