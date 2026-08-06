@@ -1,21 +1,19 @@
 package com.team72.energiai.api.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
 public class CalculoFinancieroService {
 
     /**
-     * Tarifa base definida por el proyecto.
-     * 0.75 USD por cada kWh consumido.
+     * Tarifa configurada desde application.properties
      */
-    private static final double TARIFA_KWH_USD = 0.75;
+    @Value("${energia.tarifa-usd}")
+    private Double tarifaKwhUsd;
 
     /**
      * Calcula el costo mensual en dólares.
-     *
-     * Fórmula:
-     * consumo mensual × tarifa USD
      */
     public Double calcularCostoMensualUSD(Double consumoKwh) {
 
@@ -23,14 +21,13 @@ public class CalculoFinancieroService {
             return 0.0;
         }
 
-        return consumoKwh * TARIFA_KWH_USD;
+        Double costo = consumoKwh * tarifaKwhUsd;
+
+        return redondear(costo);
     }
 
     /**
      * Convierte el costo en USD a moneda local.
-     *
-     * Fórmula:
-     * costo USD × tasa de cambio
      */
     public Double calcularCostoMonedaLocal(Double costoUsd,
                                            Double tasaCambio) {
@@ -39,7 +36,18 @@ public class CalculoFinancieroService {
             return 0.0;
         }
 
-        return costoUsd * tasaCambio;
+        Double costoLocal = costoUsd * tasaCambio;
+
+        return redondear(costoLocal);
+    }
+
+    /**
+     * Redondea cualquier valor a dos decimales.
+     */
+    private Double redondear(Double valor) {
+
+        return Math.round(valor * 100.0) / 100.0;
+
     }
 
 }
