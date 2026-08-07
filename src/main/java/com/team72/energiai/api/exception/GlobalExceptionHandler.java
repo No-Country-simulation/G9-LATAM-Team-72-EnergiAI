@@ -1,11 +1,14 @@
-package com.team72.energiai.api.exceptions;
+package com.team72.energiai.api.exception;
 
+import com.team72.energiai.api.dto.ApiErrorResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,12 +16,14 @@ import java.util.Map;
 public class GlobalExceptionHandler {
 
     /**
-     * Manejo de errores de validación del Request.
+     * Maneja los errores de validación generados por los datos enviados
+     * en las solicitudes de la API.
      */
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, Object> manejarErroresValidacion(
-            MethodArgumentNotValidException ex) {
+    public ApiErrorResponse manejarErroresValidacion(
+            MethodArgumentNotValidException ex,
+            HttpServletRequest request) {
 
         Map<String, String> errores = new HashMap<>();
 
@@ -31,26 +36,34 @@ public class GlobalExceptionHandler {
                         )
                 );
 
-        Map<String, Object> respuesta = new HashMap<>();
-
-        respuesta.put("mensaje", "Error de validación");
-        respuesta.put("errores", errores);
-
-        return respuesta;
+        return new ApiErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "La solicitud contiene uno o más datos inválidos.",
+                request.getRequestURI(),
+                errores
+        );
     }
 
     /**
-     * Manejo cuando el servicio de Machine Learning no está disponible.
+     * Maneja los errores cuando el Asistente Virtual de EnergiAI
+     * no puede atender la solicitud.
      */
     @ResponseStatus(HttpStatus.SERVICE_UNAVAILABLE)
-    @ExceptionHandler(RuntimeException.class)
-    public Map<String, Object> manejarServicioML(RuntimeException ex) {
+    @ExceptionHandler(MLServiceException.class)
+    public ApiErrorResponse manejarServicioML(
+            MLServiceException ex,
+            HttpServletRequest request) {
 
-        Map<String, Object> respuesta = new HashMap<>();
-
-        respuesta.put("mensaje", ex.getMessage());
-
-        return respuesta;
+        return new ApiErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.SERVICE_UNAVAILABLE.value(),
+                HttpStatus.SERVICE_UNAVAILABLE.getReasonPhrase(),
+                ex.getMessage(),
+                request.getRequestURI(),
+                null
+        );
     }
 
 }
