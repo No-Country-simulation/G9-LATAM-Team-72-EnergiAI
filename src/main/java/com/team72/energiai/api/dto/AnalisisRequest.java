@@ -54,5 +54,6 @@ public class AnalisisRequest {
             description = "Superficie del inmueble en metros cuadrados. Para viviendas puede omitirse.",
             example = "120"
     )
+    @PositiveOrZero(message = "La superficie no puede ser negativa.")
     private Double superficieM2;
 }
