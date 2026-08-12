@@ -74,6 +74,14 @@ public class AnalisisEnergeticoController {
                     )
             ),
             @ApiResponse(
+                    responseCode = "500",
+                    description = "Se produjo un error interno inesperado en el servidor",
+                    content = @Content(
+                            mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = ApiErrorResponse.class)
+                    )
+            ),
+            @ApiResponse(
                     responseCode = "503",
                     description = "El Asistente Virtual de EnergiAI no se encuentra disponible",
                     content = @Content(

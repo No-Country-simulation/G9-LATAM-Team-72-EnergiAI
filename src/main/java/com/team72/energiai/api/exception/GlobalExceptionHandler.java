@@ -66,4 +66,23 @@ public class GlobalExceptionHandler {
         );
     }
 
+    /**
+     * Maneja errores inesperados que no hayan sido contemplados
+     * por los manejadores específicos de la API.
+     */
+    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
+    @ExceptionHandler(Exception.class)
+    public ApiErrorResponse manejarErrorInterno(
+            Exception ex,
+            HttpServletRequest request) {
+
+        return new ApiErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                HttpStatus.INTERNAL_SERVER_ERROR.getReasonPhrase(),
+                "Se produjo un error interno en el servidor.",
+                request.getRequestURI(),
+                null
+        );
+    }
 }
