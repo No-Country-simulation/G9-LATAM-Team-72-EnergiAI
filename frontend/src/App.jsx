@@ -9,16 +9,50 @@ import {
   API_URL, USE_MOCK, TARIFA, MONEDA,
 } from './api/energiai'
 
+const STORAGE_KEYS = {
+  datos: 'energiai-datos',
+  resultado: 'energiai-ultimo-resultado',
+  historial: 'energiai-historial',
+}
+
+function leerStorage(key, fallback) {
+  if (typeof window === 'undefined') return fallback
+  try {
+    const valor = window.localStorage.getItem(key)
+    return valor ? JSON.parse(valor) : fallback
+  } catch {
+    return fallback
+  }
+}
+
 export default function App() {
-  const [datos, setDatos] = useState(VALORES_INICIALES)
+  const [datos, setDatos] = useState(() => leerStorage(STORAGE_KEYS.datos, VALORES_INICIALES))
   const [errores, setErrores] = useState({})
   const [cargando, setCargando] = useState(false)
-  const [resultado, setResultado] = useState(null)
+  const [resultado, setResultado] = useState(() => leerStorage(STORAGE_KEYS.resultado, null))
   const [error, setError] = useState(null)
-  const [historial, setHistorial] = useState([])
+  const [historial, setHistorial] = useState(() => leerStorage(STORAGE_KEYS.historial, []))
   const [escenarioActivo, setEscenarioActivo] = useState('enunciado')
   // 'desconocido' | 'despertando' | 'listo'  (solo aplica en modo API)
   const [estadoServicio, setEstadoServicio] = useState(USE_MOCK ? 'listo' : 'desconocido')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEYS.datos, JSON.stringify(datos))
+    }
+  }, [datos])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEYS.resultado, JSON.stringify(resultado))
+    }
+  }, [resultado])
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem(STORAGE_KEYS.historial, JSON.stringify(historial))
+    }
+  }, [historial])
 
   // Warm-up del backend en Render (free tier se duerme y tarda 30-50s en frio).
   useEffect(() => {
@@ -98,6 +132,7 @@ export default function App() {
 
           <PanelResultados
             resultado={resultado}
+            datos={datos}
             error={error}
             tarifa={TARIFA}
             moneda={MONEDA}

@@ -10,6 +10,11 @@
 
 const COLOR_CLASE = { ok: 'var(--ok)', mid: 'var(--mid)', bad: 'var(--bad)' }
 
+function valorEntrada(item, clave, fallback = '-') {
+  const entrada = item?.entrada ?? {}
+  return entrada[clave] ?? entrada[clave.replace(/_([a-z])/g, (_, letra) => letra.toUpperCase())] ?? fallback
+}
+
 function GraficoConsumo({ items, moneda }) {
   const W = 800
   const H = 200
@@ -17,7 +22,7 @@ function GraficoConsumo({ items, moneda }) {
   const innerW = W - P.left - P.right
   const innerH = H - P.top - P.bottom
 
-  const maxConsumo = Math.max(...items.map((i) => i.entrada?.consumo_kwh ?? 0), 1)
+  const maxConsumo = Math.max(...items.map((i) => Number(valorEntrada(i, 'consumo_kwh', 0)), 1))
   const escala = (v) => (v / maxConsumo) * innerH
   const paso = innerW / items.length
   const anchoBarra = Math.min(paso * 0.55, 54)
@@ -40,7 +45,7 @@ function GraficoConsumo({ items, moneda }) {
       })}
 
       {items.map((item, i) => {
-        const valor = item.entrada?.consumo_kwh ?? 0
+        const valor = Number(valorEntrada(item, 'consumo_kwh', 0))
         const h = escala(valor)
         const x = P.left + paso * i + (paso - anchoBarra) / 2
         const y = P.top + innerH - h
@@ -65,7 +70,7 @@ export default function Historial({ items, moneda, onLimpiar }) {
   const hay = items.length > 0
 
   const promedio = hay
-    ? items.reduce((a, i) => a + (i.entrada?.consumo_kwh ?? 0), 0) / items.length
+    ? items.reduce((a, i) => a + Number(valorEntrada(i, 'consumo_kwh', 0)), 0) / items.length
     : 0
   const costoTotal = hay
     ? items.reduce((a, i) => a + Number(i.costoEstimadoMensual || 0), 0)
@@ -111,10 +116,10 @@ export default function Historial({ items, moneda, onLimpiar }) {
                     <td>{new Date(item.fecha).toLocaleString('es-MX', {
                       day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit',
                     })}</td>
-                    <td>{item.entrada?.tipo_inmueble ?? '-'}</td>
-                    <td>{item.entrada?.consumo_kwh ?? '-'} kWh</td>
-                    <td>{item.entrada?.cantidad_equipos ?? '-'}</td>
-                    <td>{item.entrada?.uso_horario_pico ? 'Si' : 'No'}</td>
+                    <td>{valorEntrada(item, 'tipo_inmueble', '-')}</td>
+                    <td>{valorEntrada(item, 'consumo_kwh', '-')} kWh</td>
+                    <td>{valorEntrada(item, 'cantidad_equipos', '-')}</td>
+                    <td>{valorEntrada(item, 'uso_horario_pico', false) ? 'Si' : 'No'}</td>
                     <td><span className={`badge ${item.clase}`}>{item.categoria}</span></td>
                     <td>{moneda}{Number(item.costoEstimadoMensual).toFixed(2)}</td>
                   </tr>

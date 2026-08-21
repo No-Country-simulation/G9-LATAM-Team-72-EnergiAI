@@ -16,7 +16,7 @@ function EstadoVacio() {
   )
 }
 
-export default function PanelResultados({ resultado, error, tarifa, moneda }) {
+export default function PanelResultados({ resultado, datos, error, tarifa, moneda }) {
   if (error) {
     return (
       <div className="results">
