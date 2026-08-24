@@ -507,14 +507,35 @@ Por ejemplo:
 
 # 🌐 12. Comunicación y disponibilidad de servicios
 
-EnergiAI utiliza servicios independientes desplegados en Render.
+EnergiAI utiliza una arquitectura compuesta por servicios independientes desplegados en Render.
 
-Debido a las características del entorno, algunos servicios pueden encontrarse temporalmente inactivos cuando no han recibido solicitudes durante un período determinado.
+Durante una demostración, se recomienda verificar previamente la disponibilidad de los servicios siguiendo el orden indicado a continuación:
 
-Por esta razón, durante una demostración se recomienda verificar previamente que los servicios requeridos estén disponibles.
+## 1. Backend API — Spring Boot / Java
 
-> No se documenta en este README un endpoint específico para “despertar” los servicios porque el procedimiento exacto depende de la configuración actual del despliegue.
+Servidor principal encargado de la lógica de negocio, recepción de las solicitudes y coordinación de los endpoints utilizados por el MVP.
 
+https://energiai-backend-g68o.onrender.com/
+
+## 2. ML Service — Python
+
+Microservicio de Machine Learning encargado de procesar la información recibida y proporcionar la clasificación energética, la probabilidad y las recomendaciones correspondientes.
+
+https://g9-latam-team-72-energiai.onrender.com/
+
+## 3. MVP — Prototipo EnergiAI
+
+Interfaz web utilizada por el usuario para ingresar los datos de consumo y visualizar los resultados del análisis.
+
+https://energiai-frontend-4x9w.onrender.com/
+
+Orden recomendado para una demostración
+
+Backend → ML Service → MVP
+
+Se recomienda abrir los tres enlaces en pestañas separadas, siguiendo el orden anterior y finalizando con el MVP. De esta manera se favorece que los servicios necesarios se encuentren disponibles al momento de realizar la prueba.
+
+> **Nota:** El tiempo de disponibilidad de los servicios puede variar debido a las características del entorno de despliegue utilizado para el MVP.
 ---
 
 # 🛠️ 13. Tecnologías utilizadas
