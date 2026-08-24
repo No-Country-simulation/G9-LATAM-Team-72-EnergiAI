@@ -156,9 +156,9 @@ export async function analizarConsumo(datos) {
     })
   } catch (e) {
     if (e.name === 'AbortError') {
-      throw new Error('El servicio tardo demasiado en responder. Puede estar despertando; intenta de nuevo en un minuto.')
+      throw new Error('El servicio tardó demasiado en responder. Puede estar despertando; intenta de nuevo en un minuto.')
     }
-    throw new Error('No se pudo contactar el servicio. Revisa tu conexion (o la configuracion de CORS del backend).')
+    throw new Error('No se pudo contactar el servicio. Revisa tu conexión (o la configuración de CORS del backend).')
   }
 
   if (!res.ok) throw new Error(await leerError(res))

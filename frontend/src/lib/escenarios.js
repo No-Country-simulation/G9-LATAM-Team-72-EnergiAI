@@ -1,15 +1,15 @@
 /**
- * Ejemplos de utilizacion, cargables con un clic.
+ * Ejemplos de utilización, cargables con un clic.
  *
  * IMPORTANTE: el backend acepta tipoInmueble = "Casa" | "Comercio".
- * Para "Comercio", la superficie (superficieM2) mejora la clasificacion y
+ * Para "Comercio", la superficie (superficieM2) mejora la clasificación y
  * es opcional en el contrato; se incluye en los escenarios de comercio.
  */
 export const ESCENARIOS = [
   {
     id: 'eficiente',
     nombre: 'Casa eficiente',
-    descripcion: 'Vivienda pequena, sin uso en horario pico',
+    descripcion: 'Vivienda pequeña, sin uso en horario pico',
     datos: {
       consumoKwh: 180,
       usoHorarioPico: false,
@@ -67,7 +67,7 @@ export function validar(datos) {
     errores.consumoKwh = 'Ingresa un consumo mayor a 0.'
   }
   if (!Number.isInteger(equipos) || equipos <= 0) {
-    errores.cantidadEquipos = 'Ingresa un numero entero mayor a 0.'
+    errores.cantidadEquipos = 'Ingresa un número entero mayor a 0.'
   }
   if (!Number.isInteger(horas) || horas < 0 || horas > 24) {
     errores.horasAltoConsumo = 'Ingresa un valor entre 0 y 24.'
@@ -75,7 +75,7 @@ export function validar(datos) {
   if (!datos.tipoInmueble) {
     errores.tipoInmueble = 'Selecciona el tipo de inmueble.'
   }
-  // superficieM2 es opcional; si se captura, debe ser un numero positivo.
+  // superficieM2 es opcional; si se captura, debe ser un número positivo.
   if (datos.superficieM2 !== '' && datos.superficieM2 != null) {
     const sup = Number(datos.superficieM2)
     if (!Number.isFinite(sup) || sup <= 0) {

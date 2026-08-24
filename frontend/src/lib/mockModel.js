@@ -1,5 +1,5 @@
 /**
- * Simulador local del modelo de clasificacion.
+ * Simulador local del modelo de clasificación.
  *
  * PARA QUE SIRVE: permite desarrollar, demostrar y probar el frontend completo
  * mientras el backend y el modelo real (Sprint 2) todavia no estan listos.
@@ -7,7 +7,7 @@
  * VITE_API_URL en el .env. La UI no cambia.
  *
  * IMPORTANTE: esta NO es la logica oficial de negocio. Los criterios reales de
- * clasificacion los define el equipo de Data Analytics (tarea T5) y el modelo
+ * clasificación los define el equipo de Data Analytics (tarea T5) y el modelo
  * entrenado (T9). Esta simulacion solo imita la forma y el rango de la respuesta.
  *
  * CALIBRACION: las constantes estan ajustadas para que el ejemplo canonico del
@@ -63,16 +63,16 @@ export function generarRecomendaciones(p, categoria) {
     recs.push('Reducir el uso de equipos durante los horarios pico.')
   }
   if (Number(p.horasAltoConsumo) >= 6) {
-    recs.push('Distribuir las actividades de mayor consumo a lo largo del dia.')
+    recs.push('Distribuir las actividades de mayor consumo a lo largo del día.')
   }
   if (categoria !== 'Eficiente') {
-    recs.push('Evaluar los aparatos con mayor consumo energetico.')
+    recs.push('Evaluar los aparatos con mayor consumo energético.')
   }
   if (Number(p.cantidadEquipos) >= 12) {
     recs.push('Desconectar los equipos que permanecen encendidos sin uso.')
   }
   if (categoria === 'Eficiente') {
-    recs.push('Mantener los habitos actuales y dar seguimiento al consumo mensual.')
+    recs.push('Mantener los hábitos actuales y dar seguimiento al consumo mensual.')
   }
   if (recs.length < 3) {
     recs.push('Dar seguimiento a los indicadores de eficiencia a lo largo del tiempo.')

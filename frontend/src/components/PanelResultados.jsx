@@ -10,7 +10,7 @@ function EstadoVacio() {
       </svg>
       <div>
         Completa los datos y presiona <b>Analizar mi perfil</b> para ver tu
-        clasificacion, impacto financiero y recomendaciones.
+        clasificación, impacto financiero y recomendaciones.
       </div>
     </div>
   )
@@ -21,8 +21,8 @@ export default function PanelResultados({ resultado, datos, error, tarifa, moned
     return (
       <div className="results">
         <div className="alert">
-          No se pudo completar el analisis: {error}. Revisa los datos o la
-          conexion con el API e intentalo de nuevo.
+          No se pudo completar el análisis: {error}. Revisa los datos o la
+          conexión con el API e inténtalo de nuevo.
         </div>
       </div>
     )
@@ -39,7 +39,7 @@ export default function PanelResultados({ resultado, datos, error, tarifa, moned
   return (
     <div className="results">
       <div className="rcard gauge-wrap">
-        <h3 style={{ alignSelf: 'flex-start' }}>Perfil Energetico Actual</h3>
+        <h3 style={{ alignSelf: 'flex-start' }}>Perfil Energético Actual</h3>
         <GaugePerfil
           categoria={resultado.categoria}
           clase={resultado.clase}

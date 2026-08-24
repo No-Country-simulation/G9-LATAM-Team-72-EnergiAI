@@ -1,11 +1,11 @@
 /**
- * Historial de analisis + grafico de seguimiento.
+ * Historial de análisis + grafico de seguimiento.
  *
- * Cubre los recursos opcionales del proyecto: historial de analisis,
+ * Cubre los recursos opcionales del proyecto: historial de análisis,
  * visualizaciones graficas y comparacion entre periodos.
  *
  * Fuente de datos: el endpoint de consulta de resultados del API cuando esta
- * disponible; si no, los analisis hechos en esta sesion.
+ * disponible; si no, los análisis hechos en esta sesión.
  */
 
 const COLOR_CLASE = { ok: 'var(--ok)', mid: 'var(--mid)', bad: 'var(--bad)' }
@@ -31,7 +31,7 @@ function GraficoConsumo({ items, moneda }) {
 
   return (
     <svg className="chart" viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid meet"
-      role="img" aria-label="Consumo por analisis">
+      role="img" aria-label="Consumo por análisis">
       {ticks.map((t, i) => {
         const y = P.top + innerH - escala(t)
         return (
@@ -83,8 +83,8 @@ export default function Historial({ items, moneda, onLimpiar }) {
           <h2>Historial y Seguimiento</h2>
           <p className="tag" style={{ margin: 0 }}>
             {hay
-              ? `${items.length} analisis - consumo promedio ${promedio.toFixed(0)} kWh - costo acumulado ${moneda}${costoTotal.toFixed(2)}`
-              : 'Aun no hay analisis registrados en esta sesion.'}
+              ? `${items.length} análisis - consumo promedio ${promedio.toFixed(0)} kWh - costo acumulado ${moneda}${costoTotal.toFixed(2)}`
+              : 'Aún no hay análisis registrados en esta sesión.'}
           </p>
         </div>
         {hay && onLimpiar && (
@@ -119,7 +119,7 @@ export default function Historial({ items, moneda, onLimpiar }) {
                     <td>{valorEntrada(item, 'tipo_inmueble', '-')}</td>
                     <td>{valorEntrada(item, 'consumo_kwh', '-')} kWh</td>
                     <td>{valorEntrada(item, 'cantidad_equipos', '-')}</td>
-                    <td>{valorEntrada(item, 'uso_horario_pico', false) ? 'Si' : 'No'}</td>
+                    <td>{valorEntrada(item, 'uso_horario_pico', false) ? 'Sí' : 'No'}</td>
                     <td><span className={`badge ${item.clase}`}>{item.categoria}</span></td>
                     <td>{moneda}{Number(item.costoEstimadoMensual).toFixed(2)}</td>
                   </tr>
@@ -129,7 +129,7 @@ export default function Historial({ items, moneda, onLimpiar }) {
           </>
         ) : (
           <p className="chart-empty">
-            Ejecuta un analisis para comenzar a dar seguimiento a tus indicadores
+            Ejecuta un análisis para comenzar a dar seguimiento a tus indicadores
             de eficiencia a lo largo del tiempo.
           </p>
         )}

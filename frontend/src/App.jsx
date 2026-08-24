@@ -109,7 +109,7 @@ export default function App() {
         <TopBar modo={modo} />
         <div className="body">
           <h1 className="appname">
-            <b>EnergiAI</b> - Inteligencia para el Consumo Energetico
+            <b>EnergiAI</b> - Inteligencia para el Consumo Energético
           </h1>
           <p className="tag">Team 72 - Hackathon ONE G9 LATAM</p>
 

@@ -18,7 +18,7 @@ export default function FormularioAnalisis({
     <>
       <div className="section-head">
         <div>
-          <h2>Analisis de Consumo Electrico</h2>
+          <h2>Análisis de Consumo Eléctrico</h2>
           <p className="tag" style={{ margin: 0 }}>
             Carga un escenario de ejemplo o captura tus propios datos.
           </p>
@@ -54,10 +54,10 @@ export default function FormularioAnalisis({
 
         <div className="field">
           <label htmlFor="pico">
-            Horarios de mayor utilizacion <span className="hint">- usoHorarioPico</span>
+            Horarios de mayor utilización <span className="hint">- usoHorarioPico</span>
           </label>
           <select id="pico" value={String(datos.usoHorarioPico)} onChange={set('usoHorarioPico')}>
-            <option value="true">Si</option>
+            <option value="true">Sí</option>
             <option value="false">No</option>
           </select>
           <span className="fielderr" />
@@ -108,11 +108,11 @@ export default function FormularioAnalisis({
         {esComercio ? (
           <div className="field">
             <label htmlFor="superficie">
-              Superficie (m2) <span className="hint">- superficieM2 · opcional</span>
+              Superficie (m²) <span className="hint">- superficieM2 · opcional</span>
             </label>
             <input
               id="superficie" type="number" min="1" step="1"
-              placeholder="Mejora la precision en comercios"
+              placeholder="Mejora la precisión en comercios"
               className={errores.superficieM2 ? 'err' : ''}
               value={datos.superficieM2}
               onChange={set('superficieM2')}

@@ -1,5 +1,5 @@
 /**
- * Gauge semicircular con las tres zonas del perfil energetico.
+ * Gauge semicircular con las tres zonas del perfil energético.
  * La aguja se posiciona por categoria y se ajusta con la probabilidad del modelo.
  */
 function anguloAguja(clase, probabilidad) {
@@ -17,7 +17,7 @@ export default function GaugePerfil({ categoria, clase, probabilidad }) {
         className="gauge"
         viewBox="0 0 200 118"
         role="img"
-        aria-label={`Perfil energetico: ${categoria}, probabilidad ${Math.round(probabilidad * 100)}%`}
+        aria-label={`Perfil energético: ${categoria}, probabilidad ${Math.round(probabilidad * 100)}%`}
       >
         <path d="M14 100 A86 86 0 0 1 60 26" fill="none" stroke="var(--ok)" strokeWidth="16" strokeLinecap="round" />
         <path d="M70 21 A86 86 0 0 1 130 21" fill="none" stroke="var(--mid)" strokeWidth="16" strokeLinecap="round" />
