@@ -6,6 +6,8 @@
 
 **EnergiAI** es una solución de análisis energético diseñada para ayudar a hogares y pequeños comercios a comprender mejor su consumo de electricidad.
 
+![Pantalla inicial de EnergiAI](docs/Images/pantalla_inicial.png)
+
 La plataforma permite ingresar información básica sobre el consumo y las características del inmueble para generar un análisis energético mediante un servicio de Machine Learning.
 
 El resultado proporciona:
@@ -140,6 +142,8 @@ La pantalla principal presenta la sección:
 
 Desde allí se pueden ingresar los datos necesarios para realizar un análisis.
 
+![Formulario de análisis de consumo](docs/Images/Analisis-consumo.png) 
+
 ---
 
 ## 2. Completar el formulario
@@ -221,6 +225,8 @@ Ejemplo:
 # 🔎 3. Ejecutar el análisis
 
 Después de completar los cinco campos, selecciona:
+
+![Resultado del perfil energético](docs/Images/Analisis-perfil.png)
 
 ## Analizar mi perfil
 
@@ -351,6 +357,8 @@ EnergiAI no está limitado a mostrar una cantidad fija de recomendaciones.
 
 EnergiAI incorpora una sección de:
 
+![Historial y seguimiento](docs/Images/historia-seguimiento.png)
+
 ## Historial y Seguimiento
 
 Esta funcionalidad permite conservar y consultar los análisis realizados durante la sesión.
@@ -418,6 +426,8 @@ Esta opción permite eliminar los registros almacenados en el historial de la se
 ---
 
 # 🔄 9. Comparar diferentes escenarios
+
+![EnergiAI - MVP funcional](docs/Images/mvp-energiAI-resultados.png)
 
 Una de las posibilidades del MVP es realizar diferentes análisis modificando los datos de entrada.
 
